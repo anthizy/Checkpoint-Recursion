@@ -1,0 +1,53 @@
+// Function that test if a word is a palindrome
+FUNCTION is_palindrome(word : STRING) : BOOLEAN
+VAR
+  reverse_word: STRING;
+  i, n: INTEGER;
+BEGIN
+  reverse_word := "";
+  n := word.length;
+  // In this for loop we reverse the word
+  FOR i FROM n-1 TO 0 STEP -1  DO
+    reverse_word := reverse_word + word[i];
+  END_FOR
+
+  // This for loop compare each letter
+  // from the two words (reverse_word and word) 
+  // one by one to see if there are egale or not
+  FOR i FROM 0 TO n-1 STEP 1  DO
+    IF (word[i] <> reverse_word[i]) THEN
+      RETURN FALSE;
+    END_IF
+  END_FOR
+  RETURN TRUE;
+END
+
+ALGORITHM Is_Palindrome
+VAR
+  word : STRING;
+  n : INTEGER;
+BEGIN
+  n := word.length;
+  Write("Write a word");
+  Read(word);
+  
+  // Empty word or a word with a single character is a palindrome
+  IF (word := "" OR n := 1) THEN
+    Write("The word is a palindrome");
+    BREAK;
+  END_IF
+  // We compare the characters at the ends of the word
+  // If there are equals we compare the rest of the word
+  // Otherwise the word is not palindrome
+
+  IF (word[0] := word[-1]) THEN
+  
+    IF (is_palindrome(word)) THEN
+      Write("The word is a palindrome");
+    ELSE
+      Write("The word is not a palindrome");
+    END_IF
+  ELSE
+    Write("The word is not a palindrome");
+  END_IF
+END
